@@ -5,20 +5,33 @@ export default {
     "./src/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
+    fontFamily: {
+      display: ["Open Sans", "sans-serif"],
+      body: ["Open Sans", "sans-serif"],
+    },
     extend: {
-      colors: {
-        ink:  { 900:"#0E2330", 800:"#132B39", 700:"#1A3646", 100:"#E4EBEF" },
-        moss: { 500:"#3F6F54", 400:"#55936F", 300:"#7AB791" },
-        cream:{ 50:"#F7F1E6", 100:"#EFE7D6" },
+      screens: {
+        mf: "990px",
       },
-      borderRadius: { brand:"1.25rem" },
-      boxShadow: {
-        soft:"0 10px 30px -10px rgba(0,0,0,.1)",
+      keyframes: {
+        "slide-in": {
+          "0%": {
+            "-webkit-transform": "translateX(120%)",
+            transform: "translateX(120%)",
+          },
+          "100%": {
+            "-webkit-transform": "translateX(0%)",
+            transform: "translateX(0%)",
+          },
+        },
       },
-      backgroundImage: {
-        "brand-radial":"radial-gradient(900px 420px at 70% 10%, rgba(122,183,145,.15), transparent)",
+      animation: {
+        "slide-in": "slide-in 0.5s ease-out",
       },
     },
+  },
+  variants: {
+    extend: {},
   },
   plugins: [],
 };
