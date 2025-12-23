@@ -1,13 +1,13 @@
 // App.js
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Navbar from "./components/Navbar";
+import Navbar from "./components/navbar";
 
-import Services from "./components/Services";
-import Transactions from "./components/Transactions";
-import Footer from "./components/Footer";
+
+import Transactions from "./components/transactions";
+
 import Send from "./components/send";
-import Hero from "./components/hero";
+
 import Home from "./pages/home";
 
 const App = () => {
