@@ -1,49 +1,68 @@
-import React, { useState } from "react";
-import {HiMenuAlt4} from 'react-icons/hi'
-import {AiOutlineClose} from 'react-icons/ai'
-import logo from "/public/images/logo.png"
-const NavbarItem = ({title , classProps}) => {
-  return(
-    <li className={`mx-4 cursor-pointer ${classProps}`}>
-      {title}
-    </li>
-  )
-}
+import React from "react";
+import { NavLink } from "react-router-dom";
+// Icons updated for better semantic accuracy
+import { 
+  HiOutlineHome, 
+  HiArrowCircleRight, 
+  HiOutlineViewGrid,  
+} from "react-icons/hi";
+import logo from "/images/favicon.png"
 
 const NavBar = () => {
-  const[toggleMenu , setToggleMenu] = useState(false)
+  const navLinks = [
+    { name: "Home", icon: <HiOutlineHome />, path: "/" },
+    { name: "Send", icon: <HiArrowCircleRight />, path: "/send" },
+    { name: "Transactions", icon: <HiOutlineViewGrid />, path: "/transactions" },
+  ];
+
   return (
-    <nav className="w-full flex md:justify-center justify-between items-center p-4">
-        <div className="md:flex-[0.5] flex-initial justify-center items-center">
-          <img src={logo} alt="logo" className="w-32 cursor-pointer"/>
-        </div>
-        <ul className="text-white md:flex hidden list-none flex-row justify-between items-center flex-initial">
-          {["Market" , "Exchange", "Tutorials", "Wallets"].map((item,index)=>(
-              <NavbarItem key={item + index} title={item}/>
+    <div className="fixed right-6 top-1/2 -translate-y-1/2 z-50">
+      <nav className="flex flex-col items-center gap-6 p-4 rounded-3xl border border-white/10 bg-white/10 backdrop-blur-2xl shadow-2xl shadow-blue-500/10 transition-all duration-300">
+        
+        {/* Ethereum Logo / Home Link */}
+        <NavLink to="/" className="w-12 h-12 rounded-2xl flex items-center justify-center text-white hover:scale-110 transition-transform cursor-pointer">
+          <img src={logo} alt="logo"/>
+        </NavLink>
+
+        {/* Vertical Divider */}
+        <div className="w-8 h-[1px] bg-white/10" />
+
+        {/* Navigation Items */}
+        <ul className="flex flex-col items-center gap-6">
+          {navLinks.map((link) => (
+            <NavLink
+              key={link.name}
+              to={link.path}
+              className={({ isActive }) => `
+                group relative flex items-center justify-center p-3 cursor-pointer transition-all
+                ${isActive ? "text-[#757cd2] scale-110" : "text-gray-500 hover:text-white"}
+              `}
+            >
+              {({ isActive }) => (
+                <>
+                  {/* Active Indicator (Glow Line on the right) */}
+                  {isActive && (
+                    <div className="absolute -right-4 w-1 h-6 bg-[#757cd2] rounded-l-full shadow-[0_0_10px_#757cd2]" />
+                  )}
+
+                  <span className="text-2xl">
+                    {link.icon}
+                  </span>
+
+                  {/* Tooltip (Appears to the Left) */}
+                  <span className="absolute right-16 px-3 py-1 bg-gray-900 text-white text-xs rounded-md opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap border border-white/10 pointer-events-none shadow-xl">
+                    {link.name}
+                  </span>
+                </>
+              )}
+            </NavLink>
           ))}
-         <li className="bg-[#2952e3] py-2 px-7 mx-4 rounded-full cursor-pointer">Login</li>
         </ul>
 
-        <div className="flex relative ">
-            {toggleMenu
-            ?<AiOutlineClose fontSize={28} className="text-white md:hidden cursor-pointer" onClick={()=>  setToggleMenu(false)}/>
-            :
-            <HiMenuAlt4 fontSize={28} className="text-white md:hidden cursor-pointer" onClick={()=>  setToggleMenu(true)}/>
-            }
-            {toggleMenu && (
-               <ul className="z-10 fixed top-0 -right-2 p-3 w-[70vw] h-screen shadow-2xl md:hidden list-none flex flex-col justify-start items-end rounded-md blue-glassmorphism text-white animate-slide-in">
-                <li className="text-xl w-full my-2 ">
-                  <AiOutlineClose onClick={()=> setToggleMenu(false)}/>
-                </li>
-                {["Market" , "Exchange", "Tutorials", "Wallets"].map((item,index)=>(
-              <NavbarItem key={item + index} title={item} classProps={"my-2 text-lg"}/>
-                ))}
-               </ul>
-            )}
-        </div>
-    </nav>
-    )
+        <div className="w-8 h-[1px] bg-white/10" />
+      </nav>
+    </div>
+  );
 };
-
 
 export default NavBar;

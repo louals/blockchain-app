@@ -1,0 +1,116 @@
+# Blockchain Transactions App
+
+## Overview
+
+This project is a **blockchain application** built to understand how wallets, Ethereum transactions, and smart contracts work together in a real-world flow.
+
+The app allows a user to:
+
+* Connect their MetaMask wallet
+* Send ETH to another address
+* Store extra transaction data (message, keyword, timestamp) on-chain via a smart contract
+* Read and display past transactions from the blockchain
+
+This project was built **not to reinvent payments**, but to deeply understand how Ethereum, smart contracts, and front-end apps interact.
+
+## Why I Built This
+
+I built this project to:
+
+* Get hands-on experience with **Ethereum & smart contracts**
+* Understand the difference between **native ETH transfers** and **contract interactions**
+* Learn how **ethers.js** connects a front-end app to the blockchain
+* Understand how **on-chain data** is stored, retrieved, and displayed
+
+This project helped me move from theory to practice and truly understand what is happening behind the scenes.
+
+## Core Concepts Explained
+
+### Wallet Connection (MetaMask)
+
+* The app does not create accounts.
+* Users connect an existing Ethereum wallet (MetaMask).
+* MetaMask manages private keys and signs transactions securely.
+* Once connected, the app knows the user’s **public address** and can request transactions to be signed.
+
+### Sending ETH (Native Ethereum Transaction)
+
+* When a user sends ETH, the transaction is sent **directly on the Ethereum network**.
+* ETH moves from the sender’s wallet to the recipient’s wallet.
+* MetaMask asks the user to confirm the transaction.
+
+⚠️ **Important:**
+
+* The ETH transfer **does NOT go through the smart contract**.
+* Ethereum itself handles balances, transaction validation, and security.
+
+### Why a Smart Contract Is Needed
+
+* Ethereum can move ETH on its own but **cannot store custom app-specific data** like messages, keywords, and transaction history.
+* The smart contract acts as a **decentralized database** and permanent public ledger of extra transaction data.
+
+### Smart Contract = Deployed Class Instance
+
+* A smart contract is like a **class** in Solidity.
+* Deploying it creates an **instance on the blockchain** with a permanent address.
+* Functions in the contract are like **methods**, and storage variables are like **instance properties**.
+* Example deployed address: `0x6e4cBAD685be4d23E8135730Ce06c7fe8f59ECbd`.
+
+### Contract Responsibilities in This Project
+
+* Stores transaction metadata (sender, receiver, amount, message, keyword, timestamp).
+* Provides a function to add a transaction record.
+* Provides a function to read all stored transactions.
+* Does **not** hold ETH or act as a middleman; it only **records data**.
+
+## Full Project Flow
+
+1. User opens the app
+2. User connects MetaMask wallet
+3. User fills out transaction form
+4. App requests MetaMask to send ETH
+5. Ethereum transfers ETH directly between wallets
+6. App calls the smart contract to store transaction details
+7. Smart contract saves the data on-chain
+8. App reads stored transactions from the contract
+9. Transactions are displayed in the UI
+
+Flow diagram:
+
+```text
+User Wallet → Ethereum Network → Recipient Wallet
+        ↓
+   Smart Contract (stores metadata only)
+```
+
+## Timestamps & Blockchain Data
+
+* Blockchain timestamps are **Unix timestamps (seconds since 1970)**.
+* Solidity returns them as **BigInt values**.
+* The front end converts them into readable dates using JavaScript.
+
+## Technologies Used
+
+* **Solidity** – Smart contract logic
+* **Hardhat** – Contract compilation & deployment
+* **Ethereum Sepolia Testnet** – Testing environment
+* **React** – Front-end UI
+* **ethers.js** – Blockchain interaction
+* **MetaMask** – Wallet connection & transaction signing
+
+## What I Learned
+
+* How wallet authentication actually works
+* Difference between native ETH transfers and contract calls
+* How smart contracts store and expose data
+* How ethers.js bridges the front end and blockchain
+* How on-chain data flows into a UI
+
+## Final Thoughts
+
+This project is intentionally simple but conceptually powerful.
+
+* Demonstrates real Ethereum transactions
+* Demonstrates smart contract interaction
+* Demonstrates on-chain data persistence
+* Most importantly, it gave me **real understanding**, not just theory

@@ -1,23 +1,31 @@
+// App.js
 import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Navbar from "./components/Navbar";
 
-import NavBar from "./components/navbar";
-import Welcome from "./components/welcome";
-import Services from "./components/services";
-import Transactions from "./components/transactions";
-import Footer from "./components/footer";
+import Services from "./components/Services";
+import Transactions from "./components/Transactions";
+import Footer from "./components/Footer";
+import Send from "./components/send";
+import Hero from "./components/hero";
+import Home from "./pages/home";
 
 const App = () => {
   return (
-  <div className="min-h-screen">
-      <div className="gradient-bg-welcome">
-        <NavBar/>
-        <Welcome/>
+    <Router>
+      <div className="min-h-screen">
+        <div>
+          <Navbar />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/send" element={<Send />} />
+            <Route path="/transactions" element={<Transactions />} />
+            
+          </Routes>
+        </div>
       </div>
-      <Services/>
-      <Transactions/>
-      <Footer/>
-  </div>
-    )
+    </Router>
+  );
 };
 
 export default App;
