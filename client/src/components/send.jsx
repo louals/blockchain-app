@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react"; // Added useState
 import { SiEthereum } from 'react-icons/si';
 import { BsInfoCircle, BsArrowRight, BsCheckCircle } from 'react-icons/bs'; // Added Check icon
 import { TransactionContext } from "../context/TransactionContext";
-import Loader from "./Loader";
+import Loader from "./loader";
 import { shortenAddress } from "../../utils/shortenAddress";
 
 const Input = ({ placeholder, name, type, value, handleChange }) => (
